@@ -1,0 +1,22 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.pokemons{
+    .pokemon{
+        background-color: $purple;
+        color: white;
+        text-align: center;
+        transition: 1s all ease;
+        text-decoration: none;
+        &:hover{
+            cursor: pointer;
+            background-color: $red;
+        }
+    }
+}
