@@ -11,13 +11,13 @@
 |
 */
 
-use App\Models\PokemonInformation;
 
 Route::get('/test', function(){
-	$pokemon_informatino = PokemonInformation::with('comments')->find(1);
-	return $pokemon_informatino;
+	$user = \App\Models\User::with('personal_information')->find(1);
 });
 
+Route::get('/saludos/{date_one?}/{date_two?}', function($date_one = null, $date_two = null){
+});
 
 Auth::routes();
 
@@ -29,10 +29,12 @@ Route::group(['middleware' => 'auth'], function () {
 	});
 
 	Route::get('/Pokemon/Information/{PokemonInformation}', 'PokemonInformationController@get');
+	Route::post('/Pokemon/Information/update/{PokemonInformation?}', 'PokemonInformationController@store');
 
 	Route::get('/Comments/get/{PokemonInformation}', 'PokemonCommentController@get');
 	Route::post('/Comments/store/{PokemonInformation}', 'PokemonCommentController@store');
 
     Route::get('/edit', 'UserPersonalInformationController@edit')->name('user.edit');
-    Route::post('/edit', 'UserPersonalInformationController@store')->name('user.edit.save');
+	Route::post('/edit', 'UserPersonalInformationController@store')->name('user.edit.save');
+
 });

@@ -13,7 +13,7 @@
             </div>
             <div class="form-group">
                 <label>First Name</label>
-                <input type="text" class="form-control" v-model="user_edit.personal_information.first_name">
+                <input type="text" class="form-control" v-model="user_edit.personal_information.first_name" required>
             </div>
             <div class="form-group">
                 <label>Last Name</label>
@@ -23,8 +23,7 @@
                 <div class="col-md-6">
                     <label>Education Level</label>
                     <select class="form-control" v-model="user_edit.education_information.education_level">
-                        <option value="Universidad">Universidad</option>
-                        <option value="Tecnologo">Tecnologo</option>
+                        <option v-for="(education, index) in education_level" :key="index" :value="education">{{ education }}</option>
                     </select>
                 </div>
                 <div class="col-md-6">
@@ -40,11 +39,15 @@
 </template>
 
 <script>
+
+import EducationLevel from '../../helpers/education_level'
+
 export default {
     props: ['user'],
     data(){
         return{
-            user_edit: {}
+			user_edit: {},
+			education_level: EducationLevel.education_level
         }
     },
     created(){

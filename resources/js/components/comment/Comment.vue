@@ -8,7 +8,8 @@
 		</div>
 		<div>
 			<div class="form-group">
-				<input type="text" v-model="comment.body" @keyup.enter="store()" class="form-control">
+				<div class="alert alert-danger" v-if="erros != null">{{ erros.body[0] }}</div>
+				<input type="text" v-model="comment.body" @keyup.enter="store()" class="form-control" required>
 			</div>
 		</div>
 	</section>
@@ -20,7 +21,8 @@ export default {
 	data(){
 		return{
 			comment: {},
-			comments: []
+			comments: [],
+			erros: null
 		}
 	},
 	created(){
@@ -36,6 +38,8 @@ export default {
 			await axios.post(`/Comments/store/${this.id}`, this.comment).then(res => {
 				this.comments.comments.push(res.data.comment)
 				this.comment = {}
+			}).catch((err) => {
+				this.erros = err.response.data.errors
 			})
 		}
 	}

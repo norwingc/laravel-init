@@ -1944,12 +1944,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['id'],
   data: function data() {
     return {
       comment: {},
-      comments: []
+      comments: [],
+      erros: null
     };
   },
   created: function created() {
@@ -1990,6 +1992,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this2.comments.comments.push(res.data.comment);
 
                   _this2.comment = {};
+                })["catch"](function (err) {
+                  _this2.erros = err.response.data.errors;
                 });
 
               case 2:
@@ -2221,6 +2225,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _helpers_education_level__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../helpers/education_level */ "./resources/js/helpers/education_level.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2267,12 +2272,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user'],
   data: function data() {
     return {
-      user_edit: {}
+      user_edit: {},
+      education_level: _helpers_education_level__WEBPACK_IMPORTED_MODULE_1__["default"].education_level
     };
   },
   created: function created() {
@@ -38678,6 +38684,12 @@ var render = function() {
     _vm._v(" "),
     _c("div", [
       _c("div", { staticClass: "form-group" }, [
+        _vm.erros != null
+          ? _c("div", { staticClass: "alert alert-danger" }, [
+              _vm._v(_vm._s(_vm.erros.body[0]))
+            ])
+          : _vm._e(),
+        _vm._v(" "),
         _c("input", {
           directives: [
             {
@@ -38688,7 +38700,7 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
-          attrs: { type: "text" },
+          attrs: { type: "text", required: "" },
           domProps: { value: _vm.comment.body },
           on: {
             keyup: function($event) {
@@ -38940,7 +38952,7 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
-            attrs: { type: "text" },
+            attrs: { type: "text", required: "" },
             domProps: { value: _vm.user_edit.personal_information.first_name },
             on: {
               input: function($event) {
@@ -39022,15 +39034,14 @@ var render = function() {
                   }
                 }
               },
-              [
-                _c("option", { attrs: { value: "Universidad" } }, [
-                  _vm._v("Universidad")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "Tecnologo" } }, [
-                  _vm._v("Tecnologo")
-                ])
-              ]
+              _vm._l(_vm.education_level, function(education, index) {
+                return _c(
+                  "option",
+                  { key: index, domProps: { value: education } },
+                  [_vm._v(_vm._s(education))]
+                )
+              }),
+              0
             )
           ]),
           _vm._v(" "),
@@ -51710,6 +51721,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditUser_vue_vue_type_template_id_c87923c4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/helpers/education_level.js":
+/*!*************************************************!*\
+  !*** ./resources/js/helpers/education_level.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  education_level: ['Universidad', 'Tecnico', 'Bachiller']
+});
 
 /***/ }),
 

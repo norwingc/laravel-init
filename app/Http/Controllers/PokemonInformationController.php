@@ -18,4 +18,9 @@ class PokemonInformationController extends Controller
 			'pokemon_information' => $PokemonInformation
 		]);
 	}
+
+	public function store(Request $request, PokemonInformation $pokemon_information = null)
+	{
+
+	}
 }

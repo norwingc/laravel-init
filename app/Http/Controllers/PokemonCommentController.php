@@ -23,6 +23,10 @@ class PokemonCommentController extends Controller
 	 */
 	public function store(Request $request, PokemonInformation $PokemonInformation)
 	{
+		$request->validate([
+			'body' => 'required'
+		]);
+
 		$comment = new PokemonComment($request->all());
 		$PokemonInformation->comments()->save($comment);
 
