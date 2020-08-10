@@ -11,7 +11,6 @@
 |
 */
 
-
 Route::get('/test', function(){
 	$user = \App\Models\User::with('personal_information')->find(1);
 });
@@ -19,14 +18,20 @@ Route::get('/test', function(){
 Route::get('/saludos/{date_one?}/{date_two?}', function($date_one = null, $date_two = null){
 });
 
-Auth::routes();
-
 Route::get('/', 'HomeController@index')->name('home');
+
+Route::view('/register', 'register');
+Route::post('/register', 'UserController@register')->name('register');
+
+Route::view('/login', 'login');
+Route::post('/login', 'UserController@login')->name('login');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/Pokemon/{id}', function($id){
         return view('pokemon-show', compact('id'));
 	});
+
+	Route::get('/logout', 'UserController@logout');
 
 	Route::get('/Pokemon/Information/{PokemonInformation}', 'PokemonInformationController@get');
 	Route::post('/Pokemon/Information/update/{PokemonInformation?}', 'PokemonInformationController@store');

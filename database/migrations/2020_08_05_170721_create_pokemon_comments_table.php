@@ -20,7 +20,7 @@ class CreatePokemonCommentsTable extends Migration
 			$table->timestamps();
 			$table->softDeletes();
 
-			$table->foreign('pokemon_information_id')->references('id')->on('pokemon_information');
+			$table->foreign('user_id')->references('id')->on('users');
         });
     }
 
